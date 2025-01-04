@@ -6,6 +6,7 @@ export interface IConversation extends Document {
   groupName?: string;
   groupAvatar?: string;
   lastMessage?: Types.ObjectId;
+  lastMessageDate?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,13 +33,15 @@ const conversationSchema = new mongoose.Schema<IConversation>(
     lastMessage: {
       type: Schema.Types.ObjectId,
       ref: 'Message'
+    },
+    lastMessageDate: {
+      type: Date
     }
   },
   {
     timestamps: true
   }
 );
-
 
 const Conversation: Model<IConversation> = mongoose.model<IConversation>('Conversation', conversationSchema);
 

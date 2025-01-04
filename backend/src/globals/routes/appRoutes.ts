@@ -6,7 +6,7 @@ import conversationRoute from '~/features/conversation/route/conversation.route'
 const appRoutes = (app: Application) => {
   app.get('/', (req: Request, res: Response) => {
     res.status(200).json({
-      message: 'hello'
+      status: 'healthy!!'
     });
   });
   app.use('/api/v1/auth', authRoute);

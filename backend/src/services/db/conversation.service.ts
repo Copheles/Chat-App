@@ -27,25 +27,15 @@ class ConversationService {
       {
         populateFields: [
           {
-            from: 'messages',
-            localField: 'lastMessage',
-            foreignField: '_id',
-            as: 'lastMessage'
+            path: 'lastMessage'
           },
           {
-            from: 'users',
-            localField: 'members',
-            foreignField: '_id',
-            as: 'members'
+
+            path: 'members'
           }
-        ],
-        additionalFilters: {
-          members: {
-            $in: [currentUser.id]
-          }
-        }
+        ]
       },
-      '-lastMessage.createdAt'
+      '-lastMessageDate'
     ); // Sort by lastMessage.createdAt in descending order
 
     return result;

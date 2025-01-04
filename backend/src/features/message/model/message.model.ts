@@ -8,6 +8,7 @@ export interface IMessage extends Document {
   receiver: Types.ObjectId[];
   seenBy: Types.ObjectId[];
   isDeleted: boolean;
+  createdAt?: Date;
 }
 
 const messageSchema = new mongoose.Schema<IMessage>(

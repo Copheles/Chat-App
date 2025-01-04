@@ -1,6 +1,7 @@
 export interface IConversation {
   _id: string;
-  lastMessage: ILastMessage[];
+  lastMessage: ILastMessage;
+  lastMessageDate: string;
   online?: boolean;
   read?: boolean;
   groupName?: string;

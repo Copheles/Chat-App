@@ -24,6 +24,7 @@ export default function ScrollLableChatList() {
               key={conversation._id}
               _id={conversation._id}
               lastMessage={conversation.lastMessage}
+              lastMessageDate={conversation.lastMessageDate}
               members={conversation.members}
               createdAt={conversation.createdAt}
               updatedAt={conversation.updatedAt}

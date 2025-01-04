@@ -1,4 +1,4 @@
-export interface IMessage {
+export interface IRMessage {
   sender: string;
   receiver: string[];
   text: string;

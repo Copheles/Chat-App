@@ -47,6 +47,7 @@ export default function ChatConversation({
   groupAvatar,
   groupName,
   lastMessage,
+  lastMessageDate
 }: IConversation) {
   const { userInfo } = useAppSelector((state) => state.user);
 
@@ -54,7 +55,7 @@ export default function ChatConversation({
     (member: IMember) => member._id !== userInfo?.id
   );
 
-  console.log("last message: ", lastMessage[0]);
+  console.log("last message: ", lastMessage);
   console.log("chat user: ", chatUser);
   const read = true;
 
@@ -133,7 +134,7 @@ export default function ChatConversation({
             }}
             fontWeight={read ? 500 : 600}
           >
-            {lastMessage[0]?.text}
+            {lastMessage.text}
           </Typography>
           <Typography
             fontSize={13}
@@ -142,7 +143,7 @@ export default function ChatConversation({
             }}
             px={1}
           >
-            {formatDate(lastMessage[0]?.createdAt)}
+            {formatDate(lastMessageDate)}
           </Typography>
         </Box>
       </Box>

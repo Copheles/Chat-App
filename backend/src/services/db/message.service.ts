@@ -1,13 +1,13 @@
-import { IMessage } from '~/features/message/interface/message.interface';
 import { conversationService } from './conversation.service';
-import Message from '~/features/message/model/message.model';
+import Message, { IMessage } from '~/features/message/model/message.model';
 import { Types } from 'mongoose';
 import { NotFoundException } from '~/globals/middleware/errror.middleware';
 import { getPaginatedResults } from '~/globals/helpers/paginatedResults';
 import { Request } from 'express';
+import { IRMessage } from '~/features/message/interface/message.interface';
 
 class MessageService {
-  public async sendMessage(conversationId: string, requestBody: IMessage, currentUser: UserPayload) {
+  public async sendMessage(conversationId: string, requestBody: IRMessage, currentUser: UserPayload) {
     const { text, receiver } = requestBody; // `receiver` is an array
     const sender = currentUser.id;
 
@@ -24,15 +24,19 @@ class MessageService {
     }
 
     // Create the new message in the conversation
-    const newMessage = await Message.create({
+    const newMessage: IMessage = await Message.create({
       conversationId: conversation._id,
       sender,
       text,
       receiver
     });
 
+
+    console.log('newMessage :', newMessage);
+
     // Update the conversation's last message
     conversation.lastMessage = newMessage._id as Types.ObjectId;
+    conversation.lastMessageDate = newMessage.createdAt as Date;
 
     await conversation.save();
 
@@ -50,7 +54,7 @@ class MessageService {
       additionalFilters: {
         conversationId: conversation._id
       }
-    })
+    });
 
     return result;
   }

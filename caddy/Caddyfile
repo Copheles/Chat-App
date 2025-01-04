@@ -1,0 +1,12 @@
+{
+  local_certs
+}
+
+chatapp.localhost {
+  encode gzip
+  reverse_proxy frontend:5173
+}
+
+api.chatapp.localhost {
+  reverse_proxy api:5000
+}
